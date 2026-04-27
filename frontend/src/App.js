@@ -10,10 +10,12 @@ import Signup from './components/Signup';
 function App() {
   const token = localStorage.getItem('token');
   const userEmail = localStorage.getItem('userEmail');
+  const userType = localStorage.getItem('userType');
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('userType');
     window.location.href = '/login';
   };
 
@@ -47,7 +49,7 @@ function App() {
           </div>
         </div>
       </nav>
-      
+
       <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />

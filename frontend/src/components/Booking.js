@@ -28,9 +28,28 @@ const Booking = () => {
 
   const handleBooking = async (e) => {
     e.preventDefault();
-    // Simulate booking (normally we would have a logged in user and send to API)
-    alert(`Booking confirmed with ${provider.name} on ${date} at ${time}!`);
-    navigate('/');
+    
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("You must be logged in to book.");
+      navigate('/login');
+      return;
+    }
+
+    try {
+      await axios.post('http://localhost:8000/api/bookings/', {
+        provider_id: providerId,
+        service_date: `${date}T${time}:00Z`,
+        time: time
+      }, {
+        headers: { Authorization: `Token ${token}` }
+      });
+      alert(`Booking confirmed with ${provider.name} on ${date} at ${time}!`);
+      navigate('/');
+    } catch (error) {
+      console.error("Booking error:", error);
+      alert("Failed to confirm booking.");
+    }
   };
 
   if (loading) return <div className="text-center mt-5"><div className="spinner-border text-primary"></div></div>;

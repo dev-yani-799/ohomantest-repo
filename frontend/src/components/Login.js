@@ -14,8 +14,14 @@ const Login = () => {
         username: email,
         password: password
       });
+      if (res.data.user_type === 'provider') {
+        alert('Provider accounts cannot log in to the customer portal.');
+        return;
+      }
+
       localStorage.setItem('token', res.data.token);
-      localStorage.setItem('userEmail', email);
+      localStorage.setItem('userEmail', res.data.email);
+      localStorage.setItem('userType', res.data.user_type);
       alert('Logged in successfully!');
       window.location.href = '/';
     } catch (err) {

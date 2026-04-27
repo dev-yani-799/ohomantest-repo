@@ -70,6 +70,10 @@ const SearchResults = () => {
       setLoading(true);
       let url = `http://localhost:8000/api/providers/search/?service_type=${serviceType}&lat=${userCoords.lat}&lon=${userCoords.lon}`;
       
+      if (userLocation) {
+        url += `&location=${userLocation}`;
+      }
+      
       if (sortBy) {
         url += `&sort_by=${sortBy}`;
       }

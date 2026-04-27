@@ -22,6 +22,9 @@ class ProviderProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BookingSerializer(serializers.ModelSerializer):
+    user_email = serializers.ReadOnlyField(source='user.email')
+    provider_name = serializers.ReadOnlyField(source='provider.name')
+
     class Meta:
         model = Booking
         fields = '__all__'

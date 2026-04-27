@@ -13,7 +13,6 @@ def add_plumber():
         'service_type': "Plumber",
         'rating': 4.9,
         'price': 450.0,
-        # Hyderabad coordinates
         'latitude': 17.3850,
         'longitude': 78.4867,
         'is_available': True
